@@ -1,5 +1,5 @@
 import React from 'react';
-import Button from '../Button/Button';
+import Button from '../../components/Button/Button';
 import { HomePageStyle } from './HomePageStyle.styled';
 import kodimon from "../../assets/kodimon 1.png";
 import kodimon_logo from "../../assets/Kodi-logo.svg";
@@ -10,7 +10,7 @@ const HomePage = () => {
             <HomePageStyle>
                 <img id="kodimon_logo" src={kodimon_logo} alt="Kodimon Logo" />
                 <img id="kodimon" src={kodimon} alt="Kodimon" />
-                <Button className="grid-item">New Game</Button>
+                <Button route="/battle" className="grid-item">New Game</Button>
             </HomePageStyle>
         </>
     )

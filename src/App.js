@@ -1,11 +1,16 @@
 import React from 'react';
-import HomePage from './components/HomePage/HomePage';
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import HomePage from './pages/HomePage/HomePage';
+import BattlePage from './pages/BattlePage/BattlePage.js';
 
 const App = () => {
   return (
-    <>
-      <HomePage />
-    </>
+    <BrowserRouter>
+      <Routes>
+        <Route exact path="/" element={<HomePage />} />
+        <Route exact path="/battle" element={<BattlePage />} />
+      </Routes>
+    </BrowserRouter>
   )
 }
 
