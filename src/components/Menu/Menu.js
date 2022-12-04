@@ -2,7 +2,7 @@ import React from 'react';
 import Button from '../Button/Button';
 import { MenuStyle } from './MenuStyle.styled';
 
-const Menu = () => {
+const Menu = ({ dispatch }) => {
     return (
         <MenuStyle>
             <h6>Menu</h6>

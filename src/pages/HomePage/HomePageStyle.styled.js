@@ -7,12 +7,12 @@ export const HomePageStyle = styled.div`
     align-items: center;
     justify-content: center;
 
-    #kodimon {
+    .kodimon {
         width: 600px;
         height: 300px;
     }
 
-    #kodimon_logo {
+    .kodimon_logo {
         width: 170px;
         height: 200px;
         position: relative;
@@ -21,5 +21,4 @@ export const HomePageStyle = styled.div`
         top: 135px;
         right: 11px;
     }
-
 `;

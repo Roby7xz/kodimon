@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 export const PokemonCardStyle = styled.div`
-    height: 420px;
     width: 302px;
     margin: auto;
     font-family: Bellota;
@@ -10,6 +9,10 @@ export const PokemonCardStyle = styled.div`
     .pokemon {
         margin-top: 10px;
         text-align: center;
+    }
+
+    .pokemon-hp {
+        margin: 0px;
     }
 
     .pokemon-img {
@@ -25,6 +28,7 @@ export const PokemonCardStyle = styled.div`
         font-size: 12px;
         margin-bottom: 3px;
         margin-left: 6px;
+        margin-top: 0;
     }
 
     .pokemon-stats-box {

@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 export const MenuStyle = styled.div`
-
     h6 {
         font-family: Bellota;
         font-size: 12px;

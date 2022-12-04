@@ -3,8 +3,8 @@ import styled from "styled-components";
 export const BattlePageStyle = styled.div`
     display: grid;
     grid-template-rows: 1fr 1fr;
-    gap: 150px;
-    
+    gap: 75px;
+
     .pokemon-battle {
         display: grid;
         grid-template-columns: 1fr 1fr 1fr;
@@ -24,7 +24,7 @@ export const BattlePageStyle = styled.div`
     }
 
     .attack-arrow {
-        margin: 340px auto 0px;
+        margin: 275px auto 0px;
         text-align: center;
         height: 54px;
         width: 189px;

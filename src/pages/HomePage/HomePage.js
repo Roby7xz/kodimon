@@ -6,13 +6,11 @@ import kodimon_logo from "../../assets/Kodi-logo.svg";
 
 const HomePage = () => {
     return (
-        <>
-            <HomePageStyle>
-                <img id="kodimon_logo" src={kodimon_logo} alt="Kodimon Logo" />
-                <img id="kodimon" src={kodimon} alt="Kodimon" />
-                <Button route="/battle" className="grid-item">New Game</Button>
-            </HomePageStyle>
-        </>
+        <HomePageStyle>
+            <img className="kodimon_logo" src={kodimon_logo} alt="Kodimon Logo" />
+            <img className="kodimon" src={kodimon} alt="Kodimon" />
+            <Button route="/battle" className="grid-item">New Game</Button>
+        </HomePageStyle>
     )
 }
 
