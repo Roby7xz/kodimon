@@ -1,7 +1,7 @@
 import React from 'react';
 import { PokemonCardStyle } from './PokemonCardStyle.styled';
 
-const PokemonCard = ({ name }) => {
+const PokemonCard = ({ name, hp }) => {
 
     return (
         <PokemonCardStyle>
@@ -15,7 +15,7 @@ const PokemonCard = ({ name }) => {
             <div className="pokemon-stats">
                 <h6>Stats</h6>
                 <div className="pokemon-stats-box">
-                    <p className="pokemon-stats-text">HP: 100</p>
+                    <p className="pokemon-stats-text">HP: {hp}</p>
                     <p className="pokemon-stats-text">Attack: 100</p>
                     <p className="pokemon-stats-text">Defense: 100</p>
                     <p className="pokemon-stats-text">Speed: 100</p>

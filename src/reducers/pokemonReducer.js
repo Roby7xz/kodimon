@@ -1,11 +1,16 @@
 import { FETCH_POKEMONS, FETCH_POKEMON_STATS } from "../constants/actionTypes";
 
-const pokemonReducer = (state = {}, action) => {
+const INITIAL_STATE = {
+    pokemonList: {},
+    pokemonStats: {}
+};
+
+const pokemonReducer = (state = INITIAL_STATE, action) => {
     switch (action.type) {
         case FETCH_POKEMONS:
-            return action.payload;
+            return { ...state, pokemonList: action.payload };
         case FETCH_POKEMON_STATS:
-            return action.payload;
+            return { ...state, pokemonStats: action.payload };
         default:
             return state;
     }
