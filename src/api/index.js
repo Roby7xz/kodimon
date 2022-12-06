@@ -2,6 +2,5 @@ import axios from "axios";
 
 const URL = "https://pokeapi.co/api/v2/pokemon";
 
-
-export const fetchPokemons = () => axios.get(URL);
-export const fetchPokemonStats = (id) => axios.get(`${URL}/${id}`);
+export const fetchFirstPokemon = (id) => axios.get(`${URL}/${id}`);
+export const fetchSecondPokemon = (id) => axios.get(`${URL}/${id}`);
