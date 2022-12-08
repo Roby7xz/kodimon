@@ -1,22 +1,38 @@
 import styled from "styled-components";
 
 export const BattlePageStyle = styled.div`
-    display: grid;
-    grid-template-rows: 1fr 1fr;
+    display: flex;
+    flex-direction: column;
     gap: 75px;
 
     .pokemon-battle {
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr;
-        gap: 50px;
+        display: flex;
+        flex-direction: row;
     }
 
     .pokemon-menu-logs {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 50px;
-        margin-left: 100px;
-        padding: 0px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+    }
+
+    .menu-battle {
+        display:flex;
+        justify-content: center;
+        margin-left: 115px;
+    }
+
+    .logs-battle {
+        display:flex;
+        justify-content: center;
+        margin-right: 150px;
+    }
+
+    .center-logs {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
     }
     
     img {
@@ -31,7 +47,6 @@ export const BattlePageStyle = styled.div`
          transform: rotate(0deg);
     }
     
-
     .attack-arrow {
         margin: 275px auto 0px;
         text-align: center;

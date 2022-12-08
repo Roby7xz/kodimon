@@ -1,4 +1,5 @@
 import React from 'react';
+import HealthBar from '../HealthBar/HealthBar';
 import { PokemonCardStyle } from './PokemonCardStyle.styled';
 
 const PokemonCard = ({ name, currentHP, img, hp, attack, defense, speed }) => {
@@ -6,9 +7,7 @@ const PokemonCard = ({ name, currentHP, img, hp, attack, defense, speed }) => {
     return (
         <PokemonCardStyle>
             <div className="pokemon">
-                <div className="pokemon-hp-bar">
-                    <h5 className="pokemon-hp">{currentHP}</h5>
-                </div>
+                <HealthBar currentHP={currentHP} hp={hp} />
                 <h5 className="pokemon-name">{name}</h5>
                 <img className="pokemon-img" src={img} alt="Pokemon Name"></img>
             </div>

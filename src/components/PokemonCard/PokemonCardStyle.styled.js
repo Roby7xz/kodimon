@@ -4,7 +4,6 @@ export const PokemonCardStyle = styled.div`
     width: 302px;
     margin: auto;
     font-family: Bellota;
-    background-color: lightgrey;
 
     .pokemon {
         margin-top: 10px;

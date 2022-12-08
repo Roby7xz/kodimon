@@ -1,4 +1,12 @@
-import { FETCH_FIRST_POKEMON, FETCH_SECOND_POKEMON, INITIAL_CURRENT_HP, BATTLE_LOGS, FIRST_POKEMON_CURRENT_STATS, SECOND_POKEMON_CURRENT_STATS } from "../constants/actionTypes";
+import {
+    FETCH_FIRST_POKEMON,
+    FETCH_SECOND_POKEMON,
+    INITIAL_CURRENT_HP,
+    BATTLE_LOGS,
+    FIRST_POKEMON_CURRENT_STATS,
+    SECOND_POKEMON_CURRENT_STATS,
+    CLEAR_LOGS,
+} from "../constants/actionTypes";
 
 const INITIAL_STATE = {
     firstPokemon: [],
@@ -16,9 +24,17 @@ const pokemonReducer = (state = INITIAL_STATE, action) => {
         case INITIAL_CURRENT_HP:
         case FIRST_POKEMON_CURRENT_STATS:
         case SECOND_POKEMON_CURRENT_STATS:
-            return { ...state, pokemonsHP: { firstPokemonHP: action.payloadFirst, secondPokemonHP: action.payloadSecond } };
+            return {
+                ...state,
+                pokemonsHP: {
+                    firstPokemonHP: action.payloadFirst,
+                    secondPokemonHP: action.payloadSecond
+                }
+            };
         case BATTLE_LOGS:
-            return state;
+            return { ...state, logs: [...state.logs, ...action.payload] };
+        case CLEAR_LOGS:
+            return { ...state, logs: [] }
         default:
             return state;
     }

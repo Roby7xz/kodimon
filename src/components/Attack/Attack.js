@@ -1,16 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import Button from '../../components/Button/Button';
 import arrow from "../../assets/arrow.svg";
-import { useDispatch } from 'react-redux';
-import { initalCurrentHP, setSecondPokemonHP, setFirstPokemonHP } from '../../actions/pokemons';
+import { useDispatch, useSelector } from 'react-redux';
+import { initalCurrentHP, setSecondPokemonHP, setFirstPokemonHP, storeBattleLogs } from '../../actions/pokemons';
 
-const Attack = ({ firstPokemonStats, secondPokemonStats, currentPokemonsHP }) => {
+const Attack = () => {
+    const firstPokemonStats = useSelector((state) => state.pokemons.firstPokemon);
+    const secondPokemonStats = useSelector((state) => state.pokemons.secondPokemon);
+    const currentPokemonsHP = useSelector((state) => state.pokemons.pokemonsHP);
+
     const dispatch = useDispatch();
     const [direction, setDirection] = useState(false);
 
     const { firstPokemonHP, secondPokemonHP } = currentPokemonsHP;
 
-    console.log(firstPokemonHP, secondPokemonHP);
     useEffect(() => {
         if (firstPokemonStats.stats[5].base_stat > secondPokemonStats.stats[5].base_stat) {
             setDirection(true);
@@ -18,53 +21,59 @@ const Attack = ({ firstPokemonStats, secondPokemonStats, currentPokemonsHP }) =>
         else {
             setDirection(false);
         }
+
         dispatch(initalCurrentHP(firstPokemonStats.stats[0].base_stat, secondPokemonStats.stats[0].base_stat));
     }, [firstPokemonStats.stats, secondPokemonStats.stats, dispatch]);
 
-    const firstPokemonAttack = () => {
-        setDirection(false);
+    const damageCalculation = (setAttack, setDefense, setCurrentHP, isFirst, isSecond) => {
 
         const miss = Math.floor(Math.random() * 6);
-        const attack1 = firstPokemonStats.stats[1]?.base_stat / 2;
-        const defense2 = secondPokemonStats.stats[2]?.base_stat;
+        const attack = setAttack / 2;
+        const defense = setDefense / 100; //
 
-        let dmg = attack1 - attack1 * (defense2 / 100);
-        let dmgToHP = parseFloat(secondPokemonHP - dmg).toFixed(2);
+        const dmgDealt = (attack - attack * defense).toFixed(2);
+        var hpDiff = (setCurrentHP - dmgDealt).toFixed(2);
 
-        if (dmgToHP < 0) {
-            dmgToHP = 0;
+
+        if (hpDiff < 0) {
+            hpDiff = 0;
         }
-        if (miss === 1) {
-            dmg = 0;
-        }
-        dispatch(setSecondPokemonHP(firstPokemonHP, dmgToHP));
+
+        dispatch(storeBattleLogs(isFirst, isSecond, firstPokemonStats.name, secondPokemonStats.name, dmgDealt, miss));
+
+        return hpDiff;
+    }
+
+    const firstPokemonAttacks = () => {
+        setDirection(false);
+        const isFirst = true;
+        const isSecond = false;
+
+        const firstPokemonAttack = firstPokemonStats.stats[1]?.base_stat;
+        const secondPokemonDefense = secondPokemonStats.stats[2]?.base_stat;
+
+        const damageDealt = damageCalculation(firstPokemonAttack, secondPokemonDefense, secondPokemonHP, isFirst, isSecond);
+
+        dispatch(setSecondPokemonHP(firstPokemonHP, damageDealt));
     }
 
     const secondPokemonAttacks = () => {
         setDirection(true);
+        const isFirst = false;
+        const isSecond = true;
 
-        const miss = Math.floor(Math.random() * 6);
-        const attack2 = secondPokemonStats.stats[1]?.base_stat / 2;
-        const defense1 = firstPokemonStats.stats[2]?.base_stat;
+        const secondPokemonAttack = secondPokemonStats.stats[1]?.base_stat;
+        const firstPokemonDefense = firstPokemonStats.stats[2]?.base_stat;
 
-        let dmg = attack2 - attack2 * (defense1 / 100);
-        let dmgToHP = parseFloat(firstPokemonHP - dmg).toFixed(2);
+        const damageDealt = damageCalculation(secondPokemonAttack, firstPokemonDefense, firstPokemonHP, isFirst, isSecond);
 
-        if (dmgToHP < 0) {
-            dmgToHP = 0;
-        }
-
-        if (miss === 1) {
-            dmg = 0;
-        }
-
-        dispatch(setFirstPokemonHP(secondPokemonHP, dmgToHP));
+        dispatch(setFirstPokemonHP(secondPokemonHP, damageDealt));
     }
 
     return (
         <>
             <img className={`${direction ? "arrow-right" : "arrow-left"}`} src={arrow} alt="Arrow" />
-            <Button onClick={direction ? firstPokemonAttack : secondPokemonAttacks}>Attack!</Button>
+            <Button onClick={direction ? firstPokemonAttacks : secondPokemonAttacks}>Attack!</Button>
         </>
     )
 }

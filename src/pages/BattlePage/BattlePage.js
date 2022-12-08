@@ -1,11 +1,12 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { getFirstPokemon, getSecondPokemon } from "../../actions/pokemons";
+import { getFirstPokemon, getSecondPokemon, clearLogs } from "../../actions/pokemons";
 import PokemonCard from '../../components/PokemonCard/PokemonCard';
 import Menu from "../../components/Menu/Menu";
 import Logs from "../../components/Logs/Logs";
-import { BattlePageStyle } from './BattlePageStyle.styled';
 import Attack from '../../components/Attack/Attack';
+import MenuModal from '../../components/MenuModal/MenuModal';
+import { BattlePageStyle } from './BattlePageStyle.styled';
 
 
 const BattlePage = () => {
@@ -13,11 +14,7 @@ const BattlePage = () => {
     const firstPokemon = useSelector((state) => state.pokemons.firstPokemon);
     const secondPokemon = useSelector((state) => state.pokemons.secondPokemon);
     const currentPokemonsHP = useSelector((state) => state.pokemons.pokemonsHP);
-    const currentHP1 = useSelector((state) => state.pokemons.pokemonsHP.firstPokemonHP);
-    const currentHP2 = useSelector((state) => state.pokemons.pokemonsHP.secondPokemonHP);
 
-    console.log(currentPokemonsHP);
-    console.log(currentHP1, currentHP2);
 
     useEffect(() => {
         const id1 = Math.floor(Math.random() * 20);
@@ -25,6 +22,7 @@ const BattlePage = () => {
 
         dispatch(getFirstPokemon(id1));
         dispatch(getSecondPokemon(id2));
+        dispatch(clearLogs());
     }, [dispatch]);
 
     if (!firstPokemon.stats || !secondPokemon.stats) {
@@ -35,7 +33,7 @@ const BattlePage = () => {
         <BattlePageStyle>
             <div className="pokemon-battle">
                 <PokemonCard
-                    name={firstPokemon.name}
+                    name={firstPokemon.name.charAt(0).toUpperCase() + firstPokemon.name.slice(1)}
                     currentHP={currentPokemonsHP.firstPokemonHP}
                     img={firstPokemon.sprites?.other?.dream_world?.front_default}
                     hp={firstPokemon.stats[0].base_stat}
@@ -44,10 +42,10 @@ const BattlePage = () => {
                     speed={firstPokemon.stats[5].base_stat}
                 />
                 <div className="attack-arrow">
-                    <Attack currentPokemonsHP={currentPokemonsHP} firstPokemonStats={firstPokemon} secondPokemonStats={secondPokemon} />
+                    <Attack />
                 </div>
                 <PokemonCard
-                    name={secondPokemon.name}
+                    name={secondPokemon.name.charAt(0).toUpperCase() + secondPokemon.name.slice(1)}
                     currentHP={currentPokemonsHP.secondPokemonHP}
                     img={secondPokemon.sprites?.other?.dream_world?.front_default}
                     hp={secondPokemon.stats[0].base_stat}
@@ -57,8 +55,19 @@ const BattlePage = () => {
                 />
             </div>
             <div className="pokemon-menu-logs">
-                <Menu />
-                <Logs />
+                {
+                    currentPokemonsHP.firstPokemonHP === 0 || currentPokemonsHP.secondPokemonHP === 0 ? <MenuModal /> : (
+                        <div className="menu-battle">
+                            <Menu />
+                        </div>
+                    )
+                }
+                {
+                    currentPokemonsHP.firstPokemonHP === 0 || currentPokemonsHP.secondPokemonHP === 0 ? <div className="center-logs"></div> : null
+                }
+                <div className="logs-battle">
+                    <Logs />
+                </div>
             </div>
         </BattlePageStyle>
     )
