@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { getFirstPokemon, getSecondPokemon, clearLogs } from "../../actions/pokemons";
+import { fetchFirstPokemon, fetchSecondPokemon, clearLogs } from "../../actions/pokemons";
 import PokemonCard from '../../components/PokemonCard/PokemonCard';
 import Menu from "../../components/Menu/Menu";
 import Logs from "../../components/Logs/Logs";
@@ -20,8 +20,8 @@ const BattlePage = () => {
         const id1 = Math.floor(Math.random() * 20);
         const id2 = Math.floor(Math.random() * 20);
 
-        dispatch(getFirstPokemon(id1));
-        dispatch(getSecondPokemon(id2));
+        dispatch(fetchFirstPokemon(id1));
+        dispatch(fetchSecondPokemon(id2));
         dispatch(clearLogs());
     }, [dispatch]);
 
@@ -61,9 +61,6 @@ const BattlePage = () => {
                             <Menu />
                         </div>
                     )
-                }
-                {
-                    currentPokemonsHP.firstPokemonHP === 0 || currentPokemonsHP.secondPokemonHP === 0 ? <div className="center-logs"></div> : null
                 }
                 <div className="logs-battle">
                     <Logs />

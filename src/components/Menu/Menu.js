@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getFirstPokemon, getSecondPokemon, clearLogs, setSecondPokemonHP, setFirstPokemonHP } from '../../actions/pokemons';
+import { fetchFirstPokemon, fetchSecondPokemon, clearLogs, setSecondPokemonHP, setFirstPokemonHP } from '../../actions/pokemons';
 import Button from '../Button/Button';
 import { MenuStyle } from './MenuStyle.styled';
 
@@ -15,30 +15,30 @@ const Menu = () => {
     const id2 = Math.floor(Math.random() * 20);
 
     const newGame = () => {
-        dispatch(getFirstPokemon(id1));
-        dispatch(getSecondPokemon(id2));
+        dispatch(fetchFirstPokemon(id1));
+        dispatch(fetchSecondPokemon(id2));
         dispatch(clearLogs());
     }
 
     const newOpponent = () => {
 
         if (firstPokemonHP === 0) {
-            dispatch(getFirstPokemon(id1));
+            dispatch(fetchFirstPokemon(id1));
             dispatch(setSecondPokemonHP(secondPokemonBaseHP, firstPokemonBaseHP));
         }
 
         else if (secondPokemonHP === 0) {
-            dispatch(getSecondPokemon(id2));
+            dispatch(fetchSecondPokemon(id2));
             dispatch(setFirstPokemonHP(firstPokemonBaseHP, secondPokemonBaseHP));
         }
 
         else if (firstPokemonHP > secondPokemonHP) {
-            dispatch(getSecondPokemon(id2));
+            dispatch(fetchSecondPokemon(id2));
             dispatch(setFirstPokemonHP(secondPokemonBaseHP, firstPokemonBaseHP));
         }
 
         else if (firstPokemonHP < secondPokemonHP) {
-            dispatch(getFirstPokemon(id1));
+            dispatch(fetchFirstPokemon(id1));
             dispatch(setSecondPokemonHP(firstPokemonBaseHP, secondPokemonBaseHP));
         }
     }

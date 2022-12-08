@@ -10,4 +10,5 @@ export const ButtonStyle = styled.button`
     border-radius: 50px;
     border: 5px solid #73B9E5;
     cursor: pointer;
+    opacity: ${(props) => props.disabled ? "30%" : "100%"};
 `;

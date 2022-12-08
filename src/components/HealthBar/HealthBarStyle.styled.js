@@ -10,15 +10,15 @@ export const OuterContainer = styled.div`
 export const InnerContainer = styled.div`
     width: 200px;
     height: 100%;
-    background-color: WHITE;
-    border-radius: 20px;
+    background-color: lightgray;
+    border-radius: 50px;
     border: 3px solid ${props => props.borderColor};
 `;
 
 export const HealthBarGreen = styled.div`
     
     width: ${props => props.width};
-    height: 10px;
+    height: 13px;
     border-radius: 20px;
     background-color: #62FF84;
 `;
@@ -26,7 +26,7 @@ export const HealthBarGreen = styled.div`
 export const HealthBarOrange = styled.div`
     
     width: ${props => props.width};
-    height: 10px;
+    height: 13px;
     border-radius: 20px;
     background-color: #FF8300;
 `;
@@ -34,7 +34,7 @@ export const HealthBarOrange = styled.div`
 export const HealthBarRed = styled.div`
     
     width: ${props => props.width};
-    height: 10px;
+    height: 13px;
     border-radius: 20px;
     background-color: #FF7575;
 `;

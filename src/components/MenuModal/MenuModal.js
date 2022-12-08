@@ -11,8 +11,8 @@ const MenuModal = () => {
 
   const { firstPokemonHP, secondPokemonHP } = currentPokemonsHP;
 
-  const firstWin = <h2 className="won-title">{`${firstPokemon.name.charAt(0).toUpperCase() + firstPokemon.name.slice(1)} WON!`}</h2>;
-  const secondWin = <h2 className="won-title">{`${secondPokemon.name.charAt(0).toUpperCase() + secondPokemon.name.slice(1)} WON!`}</h2>
+  const firstWin = <h1 className="won-title">{`${firstPokemon.name.charAt(0).toUpperCase() + firstPokemon.name.slice(1)} WON!`}</h1>;
+  const secondWin = <h1 className="won-title">{`${secondPokemon.name.charAt(0).toUpperCase() + secondPokemon.name.slice(1)} WON!`}</h1>
 
   return (
     <>

@@ -1,12 +1,18 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { LogsStyle } from './LogsStyle.styled';
 
 const Logs = () => {
     const logs = useSelector((state) => state.pokemons.logs);
+    console.log(logs);
+
+    useEffect(() => {
+        if (logs.length > 9) {
+            logs.splice(1, 1);
+        }
+    }, [logs]);
 
     return (
-
         <LogsStyle>
             <h6>Logs</h6>
             <div className="battle-info">
@@ -35,7 +41,6 @@ const Logs = () => {
                 }
             </div>
         </LogsStyle>
-
     );
 }
 

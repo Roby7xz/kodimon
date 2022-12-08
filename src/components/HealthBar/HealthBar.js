@@ -5,7 +5,7 @@ const HealthBar = ({ hp, currentHP }) => {
     const [progress, setProgress] = useState(0);
 
     const currentHPPerc = ((currentHP / hp) * 100);
-    const width = (currentHPPerc / 100) * 200;
+    const width = (currentHPPerc / 100) * 200.5;
 
     useEffect(() => {
         setProgress(width);

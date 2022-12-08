@@ -8,6 +8,7 @@ export const BattlePageStyle = styled.div`
     .pokemon-battle {
         display: flex;
         flex-direction: row;
+        gap: 50px;
     }
 
     .pokemon-menu-logs {
@@ -25,16 +26,8 @@ export const BattlePageStyle = styled.div`
     .logs-battle {
         display:flex;
         justify-content: center;
-        margin-right: 150px;
     }
 
-    .center-logs {
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;
-    }
-    
     img {
         margin-bottom: 10px;
     }

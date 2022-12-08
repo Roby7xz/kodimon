@@ -9,11 +9,10 @@ import {
     CLEAR_LOGS
 } from "../constants/actionTypes";
 
-
-export const getFirstPokemon = (id) => async (dispatch) => {
+// Fetch first pokemon stats from poke api.
+export const fetchFirstPokemon = (id) => async (dispatch) => {
     try {
         const { data } = await api.fetchFirstPokemon(id + 1);
-
 
         dispatch({ type: FETCH_FIRST_POKEMON, payload: data });
 
@@ -22,7 +21,8 @@ export const getFirstPokemon = (id) => async (dispatch) => {
     }
 }
 
-export const getSecondPokemon = (id) => async (dispatch) => {
+// Fetch second pokemon stats from poke api.
+export const fetchSecondPokemon = (id) => async (dispatch) => {
     try {
         const { data } = await api.fetchSecondPokemon(id + 1);
 
@@ -33,19 +33,22 @@ export const getSecondPokemon = (id) => async (dispatch) => {
     }
 }
 
+// Action for setting initial HP.
 export const initalCurrentHP = (firstPokemonHP, secondPokemonHP) => (dispatch) => {
-
     dispatch({ type: INITIAL_CURRENT_HP, payloadFirst: firstPokemonHP, payloadSecond: secondPokemonHP });
 }
 
+// Action for setting first HP pokemon after damage.
 export const setFirstPokemonHP = (secondPokemonHP, firstPokemonHP) => (dispatch) => {
     dispatch({ type: FIRST_POKEMON_CURRENT_STATS, payloadFirst: firstPokemonHP, payloadSecond: secondPokemonHP });
 }
 
+// Action for setting second HP pokemon  after damage.
 export const setSecondPokemonHP = (firstPokemonHP, secondPokemonHP) => (dispatch) => {
     dispatch({ type: SECOND_POKEMON_CURRENT_STATS, payloadFirst: firstPokemonHP, payloadSecond: secondPokemonHP });
 }
 
+// Action for saving all battle logs in logs window.
 export const storeBattleLogs = (isFirst, isSecond, firstPokemonName, secondPokemonName, dmgDealt, miss) => (dispatch) => {
 
     const data = [{
@@ -60,6 +63,7 @@ export const storeBattleLogs = (isFirst, isSecond, firstPokemonName, secondPokem
     dispatch({ type: BATTLE_LOGS, payload: data });
 }
 
+// Action for clearing old logs.
 export const clearLogs = () => (dispatch) => {
     dispatch({ type: CLEAR_LOGS });
 }

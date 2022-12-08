@@ -5,12 +5,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { initalCurrentHP, setSecondPokemonHP, setFirstPokemonHP, storeBattleLogs } from '../../actions/pokemons';
 
 const Attack = () => {
+    const dispatch = useDispatch();
     const firstPokemonStats = useSelector((state) => state.pokemons.firstPokemon);
     const secondPokemonStats = useSelector((state) => state.pokemons.secondPokemon);
     const currentPokemonsHP = useSelector((state) => state.pokemons.pokemonsHP);
 
-    const dispatch = useDispatch();
     const [direction, setDirection] = useState(false);
+    const [disabled, setDisabled] = useState(false);
 
     const { firstPokemonHP, secondPokemonHP } = currentPokemonsHP;
 
@@ -27,16 +28,20 @@ const Attack = () => {
 
     const damageCalculation = (setAttack, setDefense, setCurrentHP, isFirst, isSecond) => {
 
-        const miss = Math.floor(Math.random() * 6);
         const attack = setAttack / 2;
         const defense = setDefense / 100; //
+        const miss = Math.floor(Math.random() * 6);
 
-        const dmgDealt = (attack - attack * defense).toFixed(2);
+        var dmgDealt = (attack - attack * defense).toFixed(2);
         var hpDiff = (setCurrentHP - dmgDealt).toFixed(2);
-
 
         if (hpDiff < 0) {
             hpDiff = 0;
+        }
+
+        if (miss === 1) {
+            dmgDealt = 0;
+            hpDiff = setCurrentHP;
         }
 
         dispatch(storeBattleLogs(isFirst, isSecond, firstPokemonStats.name, secondPokemonStats.name, dmgDealt, miss));
@@ -44,8 +49,14 @@ const Attack = () => {
         return hpDiff;
     }
 
+    const attackDisabled = () => {
+        setDisabled(true);
+        setTimeout(() => { setDisabled(false) }, 1000);
+    }
+
     const firstPokemonAttacks = () => {
         setDirection(false);
+        attackDisabled();
         const isFirst = true;
         const isSecond = false;
 
@@ -59,6 +70,7 @@ const Attack = () => {
 
     const secondPokemonAttacks = () => {
         setDirection(true);
+        attackDisabled();
         const isFirst = false;
         const isSecond = true;
 
@@ -73,7 +85,7 @@ const Attack = () => {
     return (
         <>
             <img className={`${direction ? "arrow-right" : "arrow-left"}`} src={arrow} alt="Arrow" />
-            <Button onClick={direction ? firstPokemonAttacks : secondPokemonAttacks}>Attack!</Button>
+            <Button disabled={disabled} onClick={direction ? firstPokemonAttacks : secondPokemonAttacks}>Attack!</Button>
         </>
     )
 }
