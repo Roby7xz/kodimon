@@ -3,7 +3,9 @@ import styled from "styled-components";
 export const BattlePageStyle = styled.div`
     display: flex;
     flex-direction: column;
-    gap: 75px;
+    justify-content: space-evenly;
+    gap: 25px;
+    
 
     .pokemon-battle {
         display: flex;
@@ -15,17 +17,22 @@ export const BattlePageStyle = styled.div`
         display: flex;
         flex-direction: row;
         justify-content: space-around;
+        gap: 25px;
     }
 
     .menu-battle {
-        display:flex;
-        justify-content: center;
         margin-left: 115px;
+        flex: 1;
     }
 
     .logs-battle {
-        display:flex;
+        margin-right: 135px;
+        flex: 1;
+    }
+
+    .logs-battle-finished {
         justify-content: center;
+        align-items: center;
     }
 
     img {

@@ -9,7 +9,7 @@ export const LogsStyle = styled.div`
     }
     
     .battle-info { 
-        height: 288px;
+        height: 250px;
         width: 600px;
         background-color: #FFF7D6;
         border: solid 3px #FFCC00;

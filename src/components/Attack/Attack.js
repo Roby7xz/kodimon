@@ -44,7 +44,7 @@ const Attack = () => {
             hpDiff = setCurrentHP;
         }
 
-        dispatch(storeBattleLogs(isFirst, isSecond, firstPokemonStats.name, secondPokemonStats.name, dmgDealt, miss));
+        dispatch(storeBattleLogs(isFirst, isSecond, firstPokemonStats.name, secondPokemonStats.name, dmgDealt, hpDiff, miss));
 
         return hpDiff;
     }

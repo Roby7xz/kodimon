@@ -49,7 +49,7 @@ export const setSecondPokemonHP = (firstPokemonHP, secondPokemonHP) => (dispatch
 }
 
 // Action for saving all battle logs in logs window.
-export const storeBattleLogs = (isFirst, isSecond, firstPokemonName, secondPokemonName, dmgDealt, miss) => (dispatch) => {
+export const storeBattleLogs = (isFirst, isSecond, firstPokemonName, secondPokemonName, dmgDealt, hpDiff, miss) => (dispatch) => {
 
     const data = [{
         isFirst: isFirst,
@@ -57,6 +57,7 @@ export const storeBattleLogs = (isFirst, isSecond, firstPokemonName, secondPokem
         firstPokemonName: firstPokemonName.charAt(0).toUpperCase() + firstPokemonName.slice(1),
         secondPokemonName: secondPokemonName.charAt(0).toUpperCase() + secondPokemonName.slice(1),
         dmgDealt: dmgDealt,
+        hpDiff: hpDiff,
         miss: miss
     }];
 

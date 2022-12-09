@@ -5,7 +5,7 @@ const HealthBar = ({ hp, currentHP }) => {
     const [progress, setProgress] = useState(0);
 
     const currentHPPerc = ((currentHP / hp) * 100);
-    const width = (currentHPPerc / 100) * 200.5;
+    const width = (currentHPPerc / 100) * 200;
 
     useEffect(() => {
         setProgress(width);
@@ -15,8 +15,8 @@ const HealthBar = ({ hp, currentHP }) => {
     if (currentHPPerc >= 50) {
         const borderColor = "#079325";
         return (
-            <OuterContainer>
-                {currentHPPerc.toFixed(2)} %
+            <OuterContainer borderColor={borderColor}>
+                <h4>{currentHPPerc.toFixed(2)} %</h4>
                 <InnerContainer borderColor={borderColor}>
                     <HealthBarGreen width={`${progress}px`} />
                 </InnerContainer>
@@ -27,8 +27,8 @@ const HealthBar = ({ hp, currentHP }) => {
     else if (currentHPPerc >= 30 && currentHPPerc < 50) {
         const borderColor = "#FF4500";
         return (
-            <OuterContainer>
-                {currentHPPerc.toFixed(2)} %
+            <OuterContainer borderColor={borderColor}>
+                <h4>{currentHPPerc.toFixed(2)} %</h4>
                 <InnerContainer borderColor={borderColor}>
                     <HealthBarOrange width={`${progress}px`} />
                 </InnerContainer>
@@ -39,8 +39,8 @@ const HealthBar = ({ hp, currentHP }) => {
     else {
         const borderColor = "#FF0000";
         return (
-            <OuterContainer>
-                {currentHPPerc.toFixed(2)} %
+            <OuterContainer borderColor={borderColor}>
+                <h4>{currentHPPerc.toFixed(2)} %</h4>
                 <InnerContainer borderColor={borderColor}>
                     <HealthBarRed width={`${progress}px`} />
                 </InnerContainer>

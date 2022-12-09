@@ -1,16 +1,16 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useSelector } from 'react-redux';
 import { LogsStyle } from './LogsStyle.styled';
 
 const Logs = () => {
     const logs = useSelector((state) => state.pokemons.logs);
-    console.log(logs);
+    const currentPokemonsHP = useSelector((state) => state.pokemons.pokemonsHP);
 
-    useEffect(() => {
-        if (logs.length > 9) {
-            logs.splice(1, 1);
-        }
-    }, [logs]);
+    const { firstPokemonHP, secondPokemonHP } = currentPokemonsHP;
+
+    if (logs.length > 8) {
+        logs.splice(1, 1);
+    }
 
     return (
         <LogsStyle>
@@ -23,7 +23,19 @@ const Logs = () => {
                                 return <p key={id}>{`${log.firstPokemonName} missed ${log.secondPokemonName}`}</p>;
                             }
 
-                            return <p key={id}>{`${log.firstPokemonName} attacked ${log.secondPokemonName} for ${log.dmgDealt} dmg`}</p>;
+                            else if (log.hpDiff === 0 && secondPokemonHP === 0) {
+                                return (
+                                    <div key={id}>
+                                        <p >{`${log.firstPokemonName} attacked ${log.secondPokemonName} for ${log.dmgDealt} dmg`}</p>
+                                        <p >{`${log.secondPokemonName} died`}</p>
+                                    </div>
+                                );
+                            }
+
+                            else {
+                                return <p key={id}>{`${log.firstPokemonName} attacked ${log.secondPokemonName} for ${log.dmgDealt} dmg`}</p>;
+                            }
+
                         }
 
                         else if (log.isSecond) {
@@ -31,12 +43,24 @@ const Logs = () => {
                                 return <p key={id}>{`${log.secondPokemonName} missed ${log.firstPokemonName}`}</p>;
                             }
 
-                            return <p key={id}>{`${log.secondPokemonName} attacked ${log.firstPokemonName} for ${log.dmgDealt} dmg`}</p>;
+                            else if (log.hpDiff === 0 && firstPokemonHP === 0) {
+                                return (
+                                    <div key={id}>
+                                        <p >{`${log.secondPokemonName} attacked ${log.firstPokemonName} for ${log.dmgDealt} dmg`}</p>
+                                        <p >{`${log.firstPokemonName} died`}</p>
+                                    </div>
+                                );
+                            }
+
+                            else {
+                                return <p key={id}>{`${log.secondPokemonName} attacked ${log.firstPokemonName} for ${log.dmgDealt} dmg`}</p>;
+                            }
                         }
 
                         else {
                             return null;
                         }
+
                     })
                 }
             </div>

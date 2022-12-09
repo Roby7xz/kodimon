@@ -15,6 +15,8 @@ const BattlePage = () => {
     const secondPokemon = useSelector((state) => state.pokemons.secondPokemon);
     const currentPokemonsHP = useSelector((state) => state.pokemons.pokemonsHP);
 
+    const dead = currentPokemonsHP.firstPokemonHP === 0 || currentPokemonsHP.secondPokemonHP === 0;
+
 
     useEffect(() => {
         const id1 = Math.floor(Math.random() * 20);
@@ -56,13 +58,13 @@ const BattlePage = () => {
             </div>
             <div className="pokemon-menu-logs">
                 {
-                    currentPokemonsHP.firstPokemonHP === 0 || currentPokemonsHP.secondPokemonHP === 0 ? <MenuModal /> : (
+                    dead ? <MenuModal /> : (
                         <div className="menu-battle">
                             <Menu />
                         </div>
                     )
                 }
-                <div className="logs-battle">
+                <div className={`${dead ? "logs-battle-finished" : "logs-battle"}`}>
                     <Logs />
                 </div>
             </div>

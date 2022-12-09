@@ -5,6 +5,7 @@ export const OuterContainer = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    color: ${props => props.borderColor}
 `;
 
 export const InnerContainer = styled.div`

@@ -10,11 +10,13 @@ export const MenuStyle = styled.div`
     }
 
     .menu {
-        padding-top: 10px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
         height: 197px;
         width: 230px;
-        display: grid;
-        text-align: center;
         gap: 8px;
         
         background-color: #FFF7D6;
