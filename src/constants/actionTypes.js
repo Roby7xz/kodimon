@@ -1,3 +1,4 @@
+// Defining and exporting action types.
 export const FETCH_FIRST_POKEMON = "FETCH_FIRST_POKEMON";
 export const FETCH_SECOND_POKEMON = "FETCH_SECOND_POKEMON";
 export const INITIAL_CURRENT_HP = "INITIAL_CURRENT_HP";

@@ -8,6 +8,7 @@ const Logs = () => {
 
     const { firstPokemonHP, secondPokemonHP } = currentPokemonsHP;
 
+    // If logs window is full then delete oldest log and set newest on the end of logs window.
     if (logs.length > 8) {
         logs.splice(1, 1);
     }
@@ -16,7 +17,7 @@ const Logs = () => {
         <LogsStyle>
             <h6>Logs</h6>
             <div className="battle-info">
-                {
+                { // Map through logs array and display log messages according to the if statements.
                     logs.map((log, id) => {
                         if (log.isFirst) {
                             if (log.miss === 1) {

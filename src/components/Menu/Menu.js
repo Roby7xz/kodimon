@@ -14,14 +14,17 @@ const Menu = () => {
     const id1 = Math.floor(Math.random() * 20);
     const id2 = Math.floor(Math.random() * 20);
 
+    // After clicking on New Game button, call's this function which fetch new pokemons
+    // and clears logs from previous game.
     const newGame = () => {
         dispatch(fetchFirstPokemon(id1));
         dispatch(fetchSecondPokemon(id2));
         dispatch(clearLogs());
     }
 
+    // After clicking on New Opponent button, calls this function which fetch new pokemon 
+    // and sets other pokemon HP on initial HP depended on if statements.
     const newOpponent = () => {
-
         if (firstPokemonHP === 0) {
             dispatch(fetchFirstPokemon(id1));
             dispatch(setSecondPokemonHP(secondPokemonBaseHP, firstPokemonBaseHP));

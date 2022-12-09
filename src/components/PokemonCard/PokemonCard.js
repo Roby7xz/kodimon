@@ -4,6 +4,7 @@ import { PokemonCardStyle } from './PokemonCardStyle.styled';
 
 const PokemonCard = ({ name, currentHP, img, hp, attack, defense, speed }) => {
 
+    // PokemonCard component that display pokemon stats.
     return (
         <PokemonCardStyle>
             <div className="pokemon">

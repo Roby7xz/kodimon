@@ -11,13 +11,17 @@ import { BattlePageStyle } from './BattlePageStyle.styled';
 
 const BattlePage = () => {
     const dispatch = useDispatch();
-    const firstPokemon = useSelector((state) => state.pokemons.firstPokemon);
+
+    // Using useSelector hook to extract data from the Redux store (pokemon stats).
+    const firstPokemon = useSelector((state) => state.pokemons.firstPokemon); 
     const secondPokemon = useSelector((state) => state.pokemons.secondPokemon);
     const currentPokemonsHP = useSelector((state) => state.pokemons.pokemonsHP);
 
+    // Usage of this constant is explained down below.
     const dead = currentPokemonsHP.firstPokemonHP === 0 || currentPokemonsHP.secondPokemonHP === 0;
 
 
+    // useEffect hook to fetch data on first render and log clearing with dispatch hook.
     useEffect(() => {
         const id1 = Math.floor(Math.random() * 20);
         const id2 = Math.floor(Math.random() * 20);
@@ -27,6 +31,7 @@ const BattlePage = () => {
         dispatch(clearLogs());
     }, [dispatch]);
 
+    // If statement that check if pokemons stats existing.
     if (!firstPokemon.stats || !secondPokemon.stats) {
         return null;
     }
@@ -57,13 +62,14 @@ const BattlePage = () => {
                 />
             </div>
             <div className="pokemon-menu-logs">
-                {
+                {// const dead which is used for conditional rendering of menu modal when game is finished.
                     dead ? <MenuModal /> : (
                         <div className="menu-battle">
                             <Menu />
                         </div>
                     )
                 }
+                {/* const dead is used here for conditional rendering for styles when game is finished. */}
                 <div className={`${dead ? "logs-battle-finished" : "logs-battle"}`}>
                     <Logs />
                 </div>

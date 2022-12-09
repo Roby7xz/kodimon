@@ -10,11 +10,13 @@ const Attack = () => {
     const secondPokemonStats = useSelector((state) => state.pokemons.secondPokemon);
     const currentPokemonsHP = useSelector((state) => state.pokemons.pokemonsHP);
 
+    // States that are used as flags for some conditions.
     const [direction, setDirection] = useState(false);
     const [disabled, setDisabled] = useState(false);
 
     const { firstPokemonHP, secondPokemonHP } = currentPokemonsHP;
 
+    // useEffect that on initial render will set current hp of pokemons.
     useEffect(() => {
         if (firstPokemonStats.stats[5].base_stat > secondPokemonStats.stats[5].base_stat) {
             setDirection(true);
@@ -26,6 +28,8 @@ const Attack = () => {
         dispatch(initalCurrentHP(firstPokemonStats.stats[0].base_stat, secondPokemonStats.stats[0].base_stat));
     }, [firstPokemonStats.stats, secondPokemonStats.stats, dispatch]);
 
+    // Function that will calculate damage and it will return it. 
+    // Except that, it stores battle logs which we are using inside logs component.
     const damageCalculation = (setAttack, setDefense, setCurrentHP, isFirst, isSecond) => {
 
         const attack = setAttack / 2;
@@ -49,11 +53,14 @@ const Attack = () => {
         return hpDiff;
     }
 
+    // Called when attack is in progress.
     const attackDisabled = () => {
         setDisabled(true);
         setTimeout(() => { setDisabled(false) }, 1000);
     }
 
+    // When direction is set to true, declaring that the first pokemon will attack
+    // and sets up current hp of first pokemon and damage dealt to the second pokemon.
     const firstPokemonAttacks = () => {
         setDirection(false);
         attackDisabled();
@@ -68,6 +75,8 @@ const Attack = () => {
         dispatch(setSecondPokemonHP(firstPokemonHP, damageDealt));
     }
 
+    // When direction is set to false, declaring that the second pokemon will attack
+    // and sets up current hp of first pokemon and damage dealt to the second pokemon.
     const secondPokemonAttacks = () => {
         setDirection(true);
         attackDisabled();

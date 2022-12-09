@@ -4,14 +4,17 @@ import { HealthBarGreen, HealthBarOrange, HealthBarRed, InnerContainer, OuterCon
 const HealthBar = ({ hp, currentHP }) => {
     const [progress, setProgress] = useState(0);
 
+    // Constants that calculates HP percentage and width.
     const currentHPPerc = ((currentHP / hp) * 100);
     const width = (currentHPPerc / 100) * 200;
 
+    // useEffect that is used to track changes on progress bar.
     useEffect(() => {
         setProgress(width);
     }, [width, setProgress]);
 
 
+    // If statements that will declare which type of healht bar will appear on the screen.
     if (currentHPPerc >= 50) {
         const borderColor = "#079325";
         return (
